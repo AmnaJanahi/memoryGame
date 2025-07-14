@@ -8,9 +8,11 @@ let match
 let win
 let firstCard
 let secondCard
+let countdown = 40
 
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
+const timerElem = document.querySelector(".timer")
 
 
 /*-------------- Functions -------------*/
@@ -52,6 +54,21 @@ function handleClick(event) {
         console.log("first is " + firstCard +"second is" + secondCard)
     }
 
+    function timer() {
+        setInterval(() => {
+        if (firstCard){
+            timerElem.textContent = countdown
+            countdown--
+    }
+
+        if (countdown < 0 )
+            timerElem.textContent = "Time's up"
+        }, 1000)
+    }
+
+    
+    
+
 
 
 
@@ -63,10 +80,8 @@ for (i = 0; i < icons.length; i++) {
 }
 
 
+timer()
 placingIcons()
-
-
-
 }
 
 
