@@ -9,6 +9,7 @@ let win
 let firstCard
 let secondCard
 let countdown = 40
+let numberOfCards = 20
 
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
@@ -17,10 +18,24 @@ const timerElem = document.querySelector(".timer")
 
 /*-------------- Functions -------------*/
 function placingIcons () {
+    // randomlyPlacing()
+    // icons.forEach(function (card, index){
+        
+    //     cardElem[index].textContent = card
+    //     card.classList.add('hidden')
+    //     card.textContent = card.iconValue
+    // })
 
-    icons.forEach(function (card, index){
-         cardElem[index].textContent = card
+
+    const shuffledIcons = randomlyPlacing(icons)
+    icons.forEach(function (icon, index){
+        
+       const card = cardElem[index]
+        card.classList.add('hidden')
+        card.iconValue = shuffledIcons[index]
     })
+    
+    
 }
 
 function handleClick(event) {
@@ -39,8 +54,10 @@ function handleClick(event) {
     }
 
     function compareOptions() {
-        if (firstCard === secondCard){
+        if (firstCard.iconValue === secondCard.iconValue){
             console.log("it is a match")
+            firstCard.classList.remove('hidden')
+            secondCard.classList.remove('hidden')
         }
         else{
             console.log("Not a match")
@@ -49,9 +66,8 @@ function handleClick(event) {
     }
 
     function resetChoice() {
-        firstCard === null
-        secondCard === null
-        console.log("first is " + firstCard +"second is" + secondCard)
+        firstCard = null
+        secondCard = null
     }
 
     function timer() {
@@ -67,7 +83,14 @@ function handleClick(event) {
     }
 
     function randomlyPlacing() {
-        
+        for (i=0; i < icons.length; i++) {
+        cardPosition = Math.floor(Math.random() * numberOfCards)
+
+        let temp = icons[i] 
+        icons[i] = icons[cardPosition] 
+        icons[cardPosition] = temp 
+    }
+    return icons
     }
 
     
@@ -86,6 +109,7 @@ for (i = 0; i < icons.length; i++) {
 
 timer()
 placingIcons()
+
 }
 
 
