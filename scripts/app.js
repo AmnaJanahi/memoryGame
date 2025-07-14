@@ -36,7 +36,6 @@ function handleClick(event) {
     }    
     }
 
-
     function compareOptions() {
         if (firstCard === secondCard){
             console.log("it is a match")
@@ -46,6 +45,16 @@ function handleClick(event) {
         }
         resetChoice()
     }
+
+    function resetChoice() {
+        firstCard === null
+        secondCard === null
+        console.log("first is " + firstCard +"second is" + secondCard)
+    }
+
+
+
+
 
 /*----------- Event Listeners ----------*/
 for (i = 0; i < icons.length; i++) {

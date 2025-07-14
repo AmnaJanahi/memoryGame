@@ -17,6 +17,7 @@ body {
     width: 110px;
     height: 120px;
     margin: 7px;
+      
 }
 
 #restart {
@@ -25,3 +26,5 @@ body {
     border-radius: 10px;
     margin: 7px;
 }
+
+
