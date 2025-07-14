@@ -57,13 +57,17 @@ function handleClick(event) {
     function timer() {
         setInterval(() => {
         if (firstCard){
-            timerElem.textContent = countdown
+            timerElem.textContent = `00:${countdown}`
             countdown--
     }
 
         if (countdown < 0 )
             timerElem.textContent = "Time's up"
         }, 1000)
+    }
+
+    function randomlyPlacing() {
+        
     }
 
     
