@@ -23,20 +23,30 @@ function placingIcons () {
 
 function handleClick(event) {
     const cardClicked = event.target.id
-    console.log("clicked"+ cardClicked)
     
-    if (firstCard){
-        firstCard = cardClicked 
-        console.log("the first click is" + firstCard)
-    }
     
     if (!firstCard){
-        secondCard = cardClicked 
+        firstCard = icons[cardClicked]
+        console.log("the first click is" + firstCard)
+    }    
+    else {
+        secondCard = icons[cardClicked]
         console.log("the second click is" + secondCard)
-    } else {
-    cardElem.disabled = true
+        compareOptions()
+    }    
     }
+
+
+    function compareOptions() {
+        if (firstCard === secondCard){
+            console.log("it is a match")
+        }
+        else{
+            console.log("Not a match")
+        }
+        resetChoice()
     }
+
 /*----------- Event Listeners ----------*/
 for (i = 0; i < icons.length; i++) {
      cardElem[i].addEventListener('click', handleClick)    
@@ -45,7 +55,8 @@ for (i = 0; i < icons.length; i++) {
 
 
 placingIcons()
-console.log()
+
+
 
 }
 
