@@ -33,19 +33,10 @@ function handleClick(event) {
     if (!firstCard){
         secondCard = cardClicked 
         console.log("the second click is" + secondCard)
+    } else {
+    cardElem.disabled = true
     }
-    
     }
-    
-
-
-
-
-
-
-
-
-
 /*----------- Event Listeners ----------*/
 for (i = 0; i < icons.length; i++) {
      cardElem[i].addEventListener('click', handleClick)    
