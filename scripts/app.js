@@ -7,18 +7,18 @@ let match
 let win = false
 let firstCard
 let secondCard
-let countdown = 140
+let countdown = 20
 let initialClick = false
 let pairs = 0
 
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
 const timerElem = document.querySelector(".timer")
-const endModal   = document.getElementById('endModal');
-const modalTitle = document.getElementById('modalTitle');
-const modalText  = document.getElementById('modalText');
-// const playAgain  = document.getElementById('playAgain');
-const restartElem  = document.querySelector('#restart');
+const endModal   = document.getElementById('endModal')
+const modalTitle = document.getElementById('modalTitle')
+const modalText  = document.getElementById('modalText')
+// const playAgain  = document.getElementById('playAgain')
+const restartElem  = document.querySelector('#restart')
 
 
 
@@ -100,29 +100,28 @@ function handleClick(event) {
     }
 
     function timer() {
-        if (win) {
-      clearInterval(timerInterval);
-      return;
-    }
-
-        setInterval(() => {
+        
+    
+        let interval = setInterval(() => {
+            if (win){
+                clearInterval(interval)
+                return
+            }
+            
             if(initialClick){
-        timerElem.textContent = `00:${countdown}`
-            countdown--
-
+                timerElem.textContent = `00:${countdown}`
+                countdown--
             }
 
         if (countdown < 0 ){
+            clearInterval(interval)
             timerElem.textContent = "Time's up"
             cardElem.forEach(card => {
             card.removeEventListener('click', handleClick)})
             showEnd("⏰ Time's Up!")
-            // clearInterval(timerInterval)
-            // disableClicks()
-            // showEnd("⏰ Time's Up!", "Try again!")
+            
 
-        }if (win === true) 
-            clearInterval(interval)
+        }
         }, 450)
         }
 
@@ -153,12 +152,7 @@ function handleClick(event) {
 
 
     }
-    // function showEnd(title) {
-//         endMessageElem.textContent = title;
-        
-//         endMessageElem.classList.remove('hidden');
-//         endMessageElem.classList.add('show');
-// }
+    
 function showEnd(title, message) {
   modalTitle.textContent = title;
   modalText.textContent  = message;
