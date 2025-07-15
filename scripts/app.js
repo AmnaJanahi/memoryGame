@@ -1,4 +1,5 @@
 function init(){
+    
 /*-------------- Constants -------------*/
 const icons = ["👒", "👒", "🧶", "🧶", "🧸","🧸", "🩰", "🩰","🎨", "🎨","🎠", "🎠","🎡","🎡", "🚂","🚂", "⛲️","⛲️","🏰", "🏰"]
 
@@ -7,9 +8,11 @@ let match
 let win = false
 let firstCard
 let secondCard
-let countdown = 20
+let countdown = 65
 let initialClick = false
 let pairs = 0
+let  intervalId
+
 
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
@@ -17,13 +20,14 @@ const timerElem = document.querySelector(".timer")
 const endModal   = document.getElementById('endModal')
 const modalTitle = document.getElementById('modalTitle')
 const modalText  = document.getElementById('modalText')
-// const playAgain  = document.getElementById('playAgain')
-const restartElem  = document.querySelector('#restart')
+const playAgain  = document.getElementById('playAgain')
+const restartButton  = document.querySelector('#restart')
 
 
 
 
 /*-------------- Functions -------------*/
+
 function placingIcons () {
     const shuffledIcons = randomlyPlacing(icons)
     icons.forEach(function (card, index){
@@ -41,7 +45,7 @@ function placingIcons () {
 }
 
 function handleClick(event) {
-    if (firstCard && secondCard) return;
+    if (firstCard && secondCard) return
     const cardClicked = event.target
     console.log(cardClicked)
 
@@ -100,11 +104,10 @@ function handleClick(event) {
     }
 
     function timer() {
-        
-    
-        let interval = setInterval(() => {
+       
+         intervalId = setInterval(() => {
             if (win){
-                clearInterval(interval)
+                clearInterval(intervalId)
                 return
             }
             
@@ -114,7 +117,7 @@ function handleClick(event) {
             }
 
         if (countdown < 0 ){
-            clearInterval(interval)
+            clearInterval(intervalId)
             timerElem.textContent = "Time's up"
             cardElem.forEach(card => {
             card.removeEventListener('click', handleClick)})
@@ -122,7 +125,7 @@ function handleClick(event) {
             
 
         }
-        }, 450)
+        }, 650)
         }
 
     function randomlyPlacing() {
@@ -144,7 +147,7 @@ function handleClick(event) {
 
              cardElem.forEach(card => {
             card.removeEventListener('click', handleClick)
-            showEnd("🎉 You Win!", "All pairs matched!");
+            showEnd("🎉 You Win!", "All pairs matched!")
         })
         
 
@@ -154,9 +157,31 @@ function handleClick(event) {
     }
     
 function showEnd(title, message) {
-  modalTitle.textContent = title;
-  modalText.textContent  = message;
-  endModal.classList.add('show');
+  modalTitle.textContent = title
+  modalText.textContent  = message
+  endModal.classList.add('show')
+}
+
+function restarGame() {
+  clearInterval(intervalId)
+  
+  match = null
+  win = false
+  firstCard = null
+  secondCard = null
+  countdown = 65
+  initialClick = false
+  pairs = 0
+  
+  timerElem.textContent = "0:65"
+
+  
+  placingIcons()
+  
+  endModal.classList.remove('show')
+  
+  timer()
+       
 }
 
 
@@ -165,7 +190,8 @@ for (i = 0; i < icons.length; i++) {
      cardElem[i].addEventListener('click', handleClick)    
 
 }
-// playAgain.addEventListener('click', () => location.reload());
+playAgain.addEventListener('click', restarGame)
+restartButton.addEventListener('click', restarGame)
 
 
 timer()
