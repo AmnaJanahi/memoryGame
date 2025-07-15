@@ -1,4 +1,3 @@
-
 function init(){
 /*-------------- Constants -------------*/
 const icons = ["👒", "👒", "🧶", "🧶", "🧸","🧸", "🩰", "🩰","🎨", "🎨","🎠", "🎠","🎡","🎡", "🚂","🚂", "⛲️","⛲️","🏰", "🏰"]
@@ -9,7 +8,6 @@ let win
 let firstCard
 let secondCard
 let countdown = 40
-let numberOfCards = 20
 
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
@@ -18,23 +16,18 @@ const timerElem = document.querySelector(".timer")
 
 /*-------------- Functions -------------*/
 function placingIcons () {
-    // randomlyPlacing()
-    // icons.forEach(function (card, index){
-        
-    //     cardElem[index].textContent = card
-    //     card.classList.add('hidden')
-    //     card.textContent = card.iconValue
-    // })
-
-
     const shuffledIcons = randomlyPlacing(icons)
-    icons.forEach(function (icon, index){
+    icons.forEach(function (card, index){
         
-       const card = cardElem[index]
-        card.classList.add('hidden')
-        card.iconValue = shuffledIcons[index]
+        cardElem[index].textContent = card
+        
+         cardElem[index].classList.add('hidden')
+        //  card.iconValue = shuffledIcons[index]
+        
+        console.log(cardElem)
+        console.log(card)
+ 
     })
-    
     
 }
 
@@ -43,21 +36,20 @@ function handleClick(event) {
     
     
     if (!firstCard){
-        firstCard = icons[cardClicked]
+        firstCard = event.target
         console.log("the first click is" + firstCard)
+         firstCard.classList.remove('hidden')
     }    
     else {
-        secondCard = icons[cardClicked]
+        secondCard = event.target
         console.log("the second click is" + secondCard)
-        compareOptions()
+         secondCard.classList.remove('hidden')
     }    
     }
 
     function compareOptions() {
-        if (firstCard.iconValue === secondCard.iconValue){
+        if (firstCard === secondCard){
             console.log("it is a match")
-            firstCard.classList.remove('hidden')
-            secondCard.classList.remove('hidden')
         }
         else{
             console.log("Not a match")
@@ -66,8 +58,9 @@ function handleClick(event) {
     }
 
     function resetChoice() {
-        firstCard = null
-        secondCard = null
+        firstCard === null
+        secondCard === null
+        console.log("first is " + firstCard +"second is" + secondCard)
     }
 
     function timer() {
@@ -84,7 +77,7 @@ function handleClick(event) {
 
     function randomlyPlacing() {
         for (i=0; i < icons.length; i++) {
-        cardPosition = Math.floor(Math.random() * numberOfCards)
+        cardPosition = Math.floor(Math.random() * icons.length)
 
         let temp = icons[i] 
         icons[i] = icons[cardPosition] 

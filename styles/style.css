@@ -20,8 +20,11 @@ body {
    font-size: 60px;  
 }
 
-.card.hidden {
+.hidden {
+    
+    color: transparent;
     background-color: rgb(31, 31, 31);
+    
 }
 
 #restart {
