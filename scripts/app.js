@@ -4,11 +4,13 @@ const icons = ["👒", "👒", "🧶", "🧶", "🧸","🧸", "🩰", "🩰","�
 
 /*---------- Variables (state) ---------*/
 let match
-let win
+let win = false
 let firstCard
 let secondCard
-let countdown = 40
+let countdown = 60
 let initialClick = false
+let pairs = 0
+
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
 const timerElem = document.querySelector(".timer")
@@ -32,6 +34,7 @@ function placingIcons () {
 }
 
 function handleClick(event) {
+    if (firstCard && secondCard) return;
     const cardClicked = event.target
     console.log(cardClicked)
 
@@ -48,9 +51,7 @@ function handleClick(event) {
          secondCard.classList.remove('hidden')
 
         compareOptions()
-
-
-
+        cardElem.stopPropagation()
     
     }   
 
@@ -73,19 +74,26 @@ function handleClick(event) {
     function compareOptions() {
         if (firstCard.textContent === secondCard.textContent){
             console.log("it is a match")  
+            pairs++
+            console.log ("the total number of pairs is" + pairs)
             firstCard.classList.remove('hidden')
             secondCard.classList.remove('hidden')
-            return
+            firstCard = null
+            secondCard = null
+
+            winner()
 
         }
         else{
             console.log("Not a match")
    
             
-        }
+        
 
-                setTimeout(()=>{      resetChoice()
-},2000)
+                setTimeout(()=>{      
+                    resetChoice()
+            },1000)
+        }
     }
 
     function timer() {
@@ -95,14 +103,10 @@ function handleClick(event) {
             countdown--
 
             }
-        if (firstCard){
-            // timerElem.textContent = `00:${countdown}`
-            // countdown--
-    }
 
         if (countdown < 0 )
             timerElem.textContent = "Time's up"
-        }, 1000)
+        }, 550)
     }
 
     function randomlyPlacing() {
@@ -114,6 +118,14 @@ function handleClick(event) {
         icons[cardPosition] = temp 
     }
     return icons
+    }
+
+    function winner(){
+        if (pairs === 10){
+            win = true
+            return
+        }
+
     }
 
     
@@ -151,4 +163,6 @@ there should also be a variable tracking correct pairs
 when the time is up stop the timer and console.log() game over ----> after show game over on page
 
 after every pair is checked it should check if they have the right number of correct pairs. if they do stop the game and let them win
+
+disabiling the click function 
 */
