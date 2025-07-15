@@ -7,13 +7,20 @@ let match
 let win = false
 let firstCard
 let secondCard
-let countdown = 60
+let countdown = 140
 let initialClick = false
 let pairs = 0
 
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
 const timerElem = document.querySelector(".timer")
+const endModal   = document.getElementById('endModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalText  = document.getElementById('modalText');
+// const playAgain  = document.getElementById('playAgain');
+const restartElem  = document.querySelector('#restart');
+
+
 
 
 /*-------------- Functions -------------*/
@@ -86,10 +93,6 @@ function handleClick(event) {
         }
         else{
             console.log("Not a match")
-   
-            
-        
-
                 setTimeout(()=>{      
                     resetChoice()
             },1000)
@@ -97,6 +100,11 @@ function handleClick(event) {
     }
 
     function timer() {
+        if (win) {
+      clearInterval(timerInterval);
+      return;
+    }
+
         setInterval(() => {
             if(initialClick){
         timerElem.textContent = `00:${countdown}`
@@ -104,10 +112,19 @@ function handleClick(event) {
 
             }
 
-        if (countdown < 0 )
+        if (countdown < 0 ){
             timerElem.textContent = "Time's up"
-        }, 550)
-    }
+            cardElem.forEach(card => {
+            card.removeEventListener('click', handleClick)})
+            showEnd("⏰ Time's Up!")
+            // clearInterval(timerInterval)
+            // disableClicks()
+            // showEnd("⏰ Time's Up!", "Try again!")
+
+        }if (win === true) 
+            clearInterval(interval)
+        }, 450)
+        }
 
     function randomlyPlacing() {
         for (i=0; i < icons.length; i++) {
@@ -123,16 +140,30 @@ function handleClick(event) {
     function winner(){
         if (pairs === 10){
             win = true
-            return
+            
+            timerElem.textContent = "🎉 You Win!"
+
+             cardElem.forEach(card => {
+            card.removeEventListener('click', handleClick)
+            showEnd("🎉 You Win!", "All pairs matched!");
+        })
+        
+
         }
 
+
     }
-
-    
-    
-
-
-
+    // function showEnd(title) {
+//         endMessageElem.textContent = title;
+        
+//         endMessageElem.classList.remove('hidden');
+//         endMessageElem.classList.add('show');
+// }
+function showEnd(title, message) {
+  modalTitle.textContent = title;
+  modalText.textContent  = message;
+  endModal.classList.add('show');
+}
 
 
 /*----------- Event Listeners ----------*/
@@ -140,6 +171,7 @@ for (i = 0; i < icons.length; i++) {
      cardElem[i].addEventListener('click', handleClick)    
 
 }
+// playAgain.addEventListener('click', () => location.reload());
 
 
 timer()
@@ -165,4 +197,9 @@ when the time is up stop the timer and console.log() game over ----> after show 
 after every pair is checked it should check if they have the right number of correct pairs. if they do stop the game and let them win
 
 disabiling the click function 
+reseat button
+
+
+adding sounds 
+
 */
