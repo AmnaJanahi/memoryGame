@@ -8,7 +8,7 @@ let win
 let firstCard
 let secondCard
 let countdown = 40
-
+let initialClick = false
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
 const timerElem = document.querySelector(".timer")
@@ -21,10 +21,10 @@ function placingIcons () {
         
         cardElem[index].textContent = card
         
-         cardElem[index].classList.add('hidden')
-        //  card.iconValue = shuffledIcons[index]
+        cardElem[index].classList.add('hidden')
+       
         
-        console.log(cardElem)
+        // console.log(cardElem)
         console.log(card)
  
     })
@@ -32,42 +32,72 @@ function placingIcons () {
 }
 
 function handleClick(event) {
-    const cardClicked = event.target.id
-    
+    const cardClicked = event.target
+    console.log(cardClicked)
+
     
     if (!firstCard){
-        firstCard = event.target
-        console.log("the first click is" + firstCard)
+        initialClick = true
+        firstCard = cardClicked
+        console.log("the first click is" , firstCard.textContent)
          firstCard.classList.remove('hidden')
     }    
     else {
-        secondCard = event.target
-        console.log("the second click is" + secondCard)
+        secondCard = cardClicked
+        console.log("the second click is" , secondCard.textContent)
          secondCard.classList.remove('hidden')
-    }    
+
+        compareOptions()
+
+
+
+    
+    }   
+
+    console.log("first card",firstCard)
+    console.log("second card",secondCard)
+
+    }
+
+    
+
+    function resetChoice() {
+        firstCard.classList.add('hidden')
+        secondCard.classList.add('hidden')
+        firstCard = null
+        secondCard = null
+         
+        console.log("first is " + firstCard +"second is" + secondCard)
     }
 
     function compareOptions() {
-        if (firstCard === secondCard){
-            console.log("it is a match")
+        if (firstCard.textContent === secondCard.textContent){
+            console.log("it is a match")  
+            firstCard.classList.remove('hidden')
+            secondCard.classList.remove('hidden')
+            return
+
         }
         else{
             console.log("Not a match")
+   
+            
         }
-        resetChoice()
-    }
 
-    function resetChoice() {
-        firstCard === null
-        secondCard === null
-        console.log("first is " + firstCard +"second is" + secondCard)
+                setTimeout(()=>{      resetChoice()
+},2000)
     }
 
     function timer() {
         setInterval(() => {
-        if (firstCard){
-            timerElem.textContent = `00:${countdown}`
+            if(initialClick){
+        timerElem.textContent = `00:${countdown}`
             countdown--
+
+            }
+        if (firstCard){
+            // timerElem.textContent = `00:${countdown}`
+            // countdown--
     }
 
         if (countdown < 0 )
@@ -107,3 +137,18 @@ placingIcons()
 
 
 document.addEventListener('DOMContentLoaded', init)
+
+
+
+
+
+/* 
+
+in the compare condition for the matching correct it should not flip back the cards
+
+there should also be a variable tracking correct pairs
+
+when the time is up stop the timer and console.log() game over ----> after show game over on page
+
+after every pair is checked it should check if they have the right number of correct pairs. if they do stop the game and let them win
+*/
