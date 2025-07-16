@@ -31,34 +31,22 @@ const scoreElem = document.querySelector('.score')
 function placingIcons () {
     const shuffledIcons = randomlyPlacing(icons)
              icons.forEach(function (card, index){
-
-            cardElem[index].classList.remove('hidden')
-                    cardElem[index].textContent = card   
-
+                cardElem[index].classList.remove('hidden')
+                cardElem[index].textContent = card   
             })
-
     setTimeout(()=>{
-
-        
          icons.forEach(function (card, index){
         cardElem[index].textContent = card   
-
-     cardElem[index].classList.add('hidden')
-       
-        // console.log(cardElem)
+        cardElem[index].classList.add('hidden')
         console.log(card) 
- 
     })
-},5000)
-
-    
+},5000)    
 }
 
 function handleClick(event) {
     if (firstCard && secondCard) return
     const cardClicked = event.target
     console.log(cardClicked)
-
     
     if (!firstCard){
         audioElem.play()
@@ -77,27 +65,21 @@ function handleClick(event) {
         
     
     }   
-
     console.log("first card",firstCard)
     console.log("second card",secondCard)
-
     }
-
-    
 
     function resetChoice() {
         firstCard.classList.add('hidden')
         secondCard.classList.add('hidden')
         firstCard = null
         secondCard = null
-         
         console.log("first is " + firstCard +"second is" + secondCard)
     }
 
     function compareOptions() {
         if (firstCard.textContent === secondCard.textContent){
             console.log("it is a match") 
-
             CorrectAnswerElem.play()
             pairs++
             score++
@@ -109,14 +91,10 @@ function handleClick(event) {
             firstCard.classList.add('correct')
             secondCard.classList.add('correct')
 
-            
-
             firstCard = null
             secondCard = null
 
             winner()
-
-
         }
         else{
             console.log("Not a match")
@@ -124,14 +102,11 @@ function handleClick(event) {
                     resetChoice()
             },250)
             score--
-            addScore() 
-            
+            addScore()    
         }
-        // console.log(score)
     }
 
     function timer() {
-       
          intervalId = setInterval(() => {
             if (win){
                 clearInterval(intervalId)
@@ -250,21 +225,3 @@ document.addEventListener('DOMContentLoaded', init)
 
 
 
-
-/* 
-
-in the compare condition for the matching correct it should not flip back the cards
-
-there should also be a variable tracking correct pairs
-
-when the time is up stop the timer and console.log() game over ----> after show game over on page
-
-after every pair is checked it should check if they have the right number of correct pairs. if they do stop the game and let them win
-
-disabiling the click function 
-reseat button
-
-
-adding sounds 
-
-*/
