@@ -8,39 +8,66 @@ let match
 let win = false
 let firstCard
 let secondCard
-let countdown = 65
+let countdown = 50
 let initialClick = false
 let pairs = 0
 let  intervalId
 
+//   if(e.target.classList.contains(modal)){
+//     console.log("clicked on modal")
+//   }
 
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
 const timerElem = document.querySelector(".timer")
-const endModal   = document.getElementById('endModal')
-const modalTitle = document.getElementById('modalTitle')
-const modalText  = document.getElementById('modalText')
-const playAgain  = document.getElementById('playAgain')
+const endModal   = document.querySelector('#endModal')
+const modalTitle = document.querySelector('#modalTitle')
+const modalText  = document.querySelector('#modalText')
+const playAgain  = document.querySelector('#playAgain')
 const restartButton  = document.querySelector('#restart')
-
-
-
+const audioElem = document.querySelector('#flipCard')
+const CorrectAnswerElem = document.querySelector('#CorrectAnswer')
 
 /*-------------- Functions -------------*/
 
-function placingIcons () {
-    const shuffledIcons = randomlyPlacing(icons)
-    icons.forEach(function (card, index){
+// function placingIcons () {
+//     const shuffledIcons = randomlyPlacing(icons)
+//     icons.forEach(function (card, index){
         
-        cardElem[index].textContent = card
+//         cardElem[index].textContent = card
         
-        cardElem[index].classList.add('hidden')
+//         cardElem[index].classList.add('hidden')
        
         
+//         // console.log(cardElem)
+//         console.log(card)
+ 
+//     })
+    
+// }
+function placingIcons () {
+    const shuffledIcons = randomlyPlacing(icons)
+             icons.forEach(function (card, index){
+
+            cardElem[index].classList.remove('hidden')
+                    cardElem[index].textContent = card   
+
+            })
+
+    setTimeout(()=>{
+
+        
+         icons.forEach(function (card, index){
+        cardElem[index].textContent = card   
+
+     cardElem[index].classList.add('hidden')
+       
         // console.log(cardElem)
-        console.log(card)
+        console.log(card) 
  
     })
+},3000)
+
     
 }
 
@@ -51,18 +78,20 @@ function handleClick(event) {
 
     
     if (!firstCard){
+        audioElem.play()
         initialClick = true
         firstCard = cardClicked
         console.log("the first click is" , firstCard.textContent)
          firstCard.classList.remove('hidden')
     }    
     else {
+        audioElem.play()
         secondCard = cardClicked
         console.log("the second click is" , secondCard.textContent)
          secondCard.classList.remove('hidden')
 
         compareOptions()
-        cardElem.stopPropagation()
+        // cardElem.stopPropagation()
     
     }   
 
@@ -84,22 +113,28 @@ function handleClick(event) {
 
     function compareOptions() {
         if (firstCard.textContent === secondCard.textContent){
-            console.log("it is a match")  
+            console.log("it is a match") 
+
+            CorrectAnswerElem.play()
             pairs++
             console.log ("the total number of pairs is" + pairs)
             firstCard.classList.remove('hidden')
             secondCard.classList.remove('hidden')
+            firstCard.classList.add('correct')
+            secondCard.classList.add('correct')
+
             firstCard = null
             secondCard = null
 
             winner()
+
 
         }
         else{
             console.log("Not a match")
                 setTimeout(()=>{      
                     resetChoice()
-            },1000)
+            },250)
         }
     }
 
@@ -125,7 +160,7 @@ function handleClick(event) {
             
 
         }
-        }, 650)
+        }, 1000)
         }
 
     function randomlyPlacing() {
@@ -149,11 +184,7 @@ function handleClick(event) {
             card.removeEventListener('click', handleClick)
             showEnd("🎉 You Win!", "All pairs matched!")
         })
-        
-
         }
-
-
     }
     
 function showEnd(title, message) {
@@ -162,8 +193,10 @@ function showEnd(title, message) {
   endModal.classList.add('show')
 }
 
-function restarGame() {
+function restarGame(e) {
   clearInterval(intervalId)
+
+
   
   match = null
   win = false
@@ -185,17 +218,20 @@ function restarGame() {
 }
 
 
+
+
 /*----------- Event Listeners ----------*/
 for (i = 0; i < icons.length; i++) {
      cardElem[i].addEventListener('click', handleClick)    
 
 }
-playAgain.addEventListener('click', restarGame)
+playAgain.addEventListener('click', ()=>{location.reload()})
 restartButton.addEventListener('click', restarGame)
 
 
 timer()
 placingIcons()
+
 
 }
 
