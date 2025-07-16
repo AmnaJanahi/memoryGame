@@ -74,7 +74,7 @@ function handleClick(event) {
          secondCard.classList.remove('hidden')
 
         compareOptions()
-        // cardElem.stopPropagation()
+        
     
     }   
 
