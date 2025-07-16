@@ -9,12 +9,19 @@ ________________________________________
 Contents
 
 •	Introduction
+
 •	Project Features
+
 •	How to Play
+
 •	Technologies Used
+
 •	Core Logic
+
 •	Wins & Blockers
+
 •	Future Enhancements
+
 •	Conclusion
 ________________________________________
 Project Features
@@ -37,7 +44,8 @@ Technologies
 
 •	Git
 
-<img width="1217" height="1021" alt="image" src="https://github.com/user-attachments/assets/b34881d9-1f00-465c-92cf-fcd616f34009" />
+<img width="1165" height="1018" alt="image" src="https://github.com/user-attachments/assets/4e37452a-691d-4b84-95b3-4e2b8867d8eb" />
+
 
 How to Play
 1.	All cards will be revealed for 5 seconds at the beginning.
