@@ -2,7 +2,8 @@
  
 Introduction
 The Memory Card Game is a classic, browser-based matching game where players flip over cards to find matching pairs within a certain time limit. The game includes sound effects, scoring, and win/loss conditions, making it both engaging and interactive.
-Play the game:
+
+Play the game:https://amnajanahi.github.io/memoryGame/
 
 ________________________________________
 Contents
