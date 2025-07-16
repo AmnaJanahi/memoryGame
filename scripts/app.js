@@ -140,7 +140,7 @@ function handleClick(event) {
     }
 
     function winner(){
-        if (pairs === 10 && score >= 6 ){
+        if (pairs === 10 ){
             win = true
             
             timerElem.textContent = "🎉 You Win!"
