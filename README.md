@@ -93,25 +93,25 @@ Wins and Blockers
 
  Wins
  
-•	Timed memory logic works reliably.
-
-•	Clean UI with card flip feedback and modals.
-
-•	Game restarts cleanly without needing a page refresh.
+. Successfully implemented a countdown-based memory game with responsive gameplay.
+  
+. Ensured the timer and score systems function reliably, enforcing win and loss conditions.
 
 
 challanges
 
 •	Resetting timer logic required refactoring shared intervalId.
 
-•	Reveling all the cards at the beginning of the game and then flip them back while linking the array icon with the element index 
+• All cards are revealed at the beginning of the game and then flipped back, with each card's icon linked to its corresponding index in the array
 
 •	 The delay coordination between card reveal and user interaction was tricky.
 ________________________________________
  Future Enhancements
  
 •	Difficulty levels (more cards / faster timer)
-•	High score tracking
-Conclusion
-This project demonstrates DOM traversal, event handling, timing functions, state tracking, and user feedback mechanisms. The result is a polished, playable game with clean logic and modular code structure.
 
+•	High score tracking
+
+________________________________________
+Conclusion
+In conclusion, creating this game was an enjoyable experience and gave me the opportunity to complete a full project from start to finish.
