@@ -92,18 +92,16 @@ Wins and Blockers
 
  Wins
  
-. Successfully implemented a countdown-based memory game with responsive gameplay.
-  
-. Ensured the timer and score(guessCount) systems function reliably, enforcing win and loss conditions.
+Restart Button with Full Reset Logic:
+
+Implemented a custom restart function that stops the timer, resets all game states, and reshuffles the icons — ensuring a smooth restart without reloading the page.
 
 
 challanges
 
-•	Resetting timer logic required refactoring shared intervalId.
+Icon–Card Binding:
 
-• All cards are revealed at the beginning of the game and then flipped back, with each card's icon linked to its corresponding index in the array
-
-•	 The delay coordination between card reveal and user interaction was tricky.
+Linking string-based icons to DOM card elements was tricky. Since strings can’t hold properties, I had to rely on precise indexing to sync the shuffled icons with their visual elements.
 ________________________________________
  Future Enhancements
  
