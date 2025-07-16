@@ -21,10 +21,10 @@ Project Features
 •	20 cards (10 pairs of emoji icons)
 •	Cards briefly revealed at game start (5 seconds)
 •	Flip animations and sounds
-•	Score tracking (+1 for correct, −1 for wrong)
+•The guess count is set to 8 tries
 •	Modal end screen for win/loss feedback
 •	Restart and Play Again options
-•	Lose if time ends or score drops below −1
+•	Lose if time ends or guessCount is 0
 ________________________________________
 Technologies
 
@@ -43,7 +43,7 @@ How to Play
 2.	Start matching by clicking two cards at a time.
 3.	Correct matches stay visible, incorrect ones flip back.
 4.	Match all 10 pairs before time runs out to win.
-5.	Score decreases with each mismatch. Losing score ≤ −1 ends the game early.
+5.	Score decreases with each mismatch. Losing when its 0, which ends the game early.
 ________________________________________
 
  Core Logic
@@ -80,9 +80,8 @@ Timer
 
 Scoring System
 
-•	score++ for a match.
 •	score-- for a mismatch.
-•	Losing condition: score < -1
+•	Losing condition: score = 0
 
 Restart
 
@@ -95,7 +94,7 @@ Wins and Blockers
  
 . Successfully implemented a countdown-based memory game with responsive gameplay.
   
-. Ensured the timer and score systems function reliably, enforcing win and loss conditions.
+. Ensured the timer and score(guessCount) systems function reliably, enforcing win and loss conditions.
 
 
 challanges
@@ -108,9 +107,7 @@ challanges
 ________________________________________
  Future Enhancements
  
-•	Difficulty levels (more cards / faster timer)
-
-•	High score tracking
+•	Adding difficulty levels (more cards / faster timer/ less guess count)
 
 ________________________________________
 Conclusion
