@@ -12,7 +12,7 @@ let countdown = 65
 let initialClick = false
 let pairs = 0
 let  intervalId
-let score = 0
+let score = 8
 
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
@@ -82,8 +82,6 @@ function handleClick(event) {
             console.log("it is a match") 
             CorrectAnswerElem.play()
             pairs++
-            score++
-            addScore() 
             
             console.log ("the total number of pairs is" + pairs)
             firstCard.classList.remove('hidden')
@@ -149,7 +147,7 @@ function handleClick(event) {
 
             cardElem.forEach(card => {
             card.removeEventListener('click', handleClick)
-            showEnd("🎉 You Win!", `Your Score Is ${score}`)
+            showEnd("🎉 You Win!", `All pairs match`)
         })}
         
         
@@ -192,11 +190,11 @@ function addScore() {
 }
 
 function scoureCount() {
-    if (score <= -1 ) {
+    if (score <= 0 ) {
         cardElem.forEach(card => {
             card.removeEventListener('click', handleClick)
             clearInterval(intervalId)
-        showEnd("❌ You lose", `Your Score Is ${score}`)
+        showEnd("❌ You lose", `You have run out of guesses`)
     })
     }
 }
