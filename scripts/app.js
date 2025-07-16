@@ -8,7 +8,7 @@ let match
 let win = false
 let firstCard
 let secondCard
-let countdown = 50
+let countdown = 65
 let initialClick = false
 let pairs = 0
 let  intervalId
@@ -49,7 +49,7 @@ function placingIcons () {
         console.log(card) 
  
     })
-},3000)
+},5000)
 
     
 }
@@ -167,16 +167,18 @@ function handleClick(event) {
     }
 
     function winner(){
-        if (pairs === 10){
+        if (pairs === 10 && score >= 6 ){
             win = true
             
             timerElem.textContent = "🎉 You Win!"
 
-             cardElem.forEach(card => {
+            cardElem.forEach(card => {
             card.removeEventListener('click', handleClick)
-            showEnd("🎉 You Win!", `🎉 Your Score Is ${score}`)
-        })
-        }
+            showEnd("🎉 You Win!", `Your Score Is ${score}`)
+        })}
+        
+        
+        
     }
     
 function showEnd(title, message) {
@@ -211,6 +213,17 @@ function restarGame(e) {
 
 function addScore() {
     scoreElem.textContent = `Score: ${score}`
+    scoureCount()
+}
+
+function scoureCount() {
+    if (score <= -1 ) {
+        cardElem.forEach(card => {
+            card.removeEventListener('click', handleClick)
+            clearInterval(intervalId)
+        showEnd("❌ You lose", `Your Score Is ${score}`)
+    })
+    }
 }
 
 
