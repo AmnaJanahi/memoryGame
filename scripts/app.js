@@ -12,10 +12,7 @@ let countdown = 50
 let initialClick = false
 let pairs = 0
 let  intervalId
-
-//   if(e.target.classList.contains(modal)){
-//     console.log("clicked on modal")
-//   }
+let score = 0
 
 /*----- Cached Element References  -----*/
 const cardElem = document.querySelectorAll(".cards")
@@ -27,24 +24,10 @@ const playAgain  = document.querySelector('#playAgain')
 const restartButton  = document.querySelector('#restart')
 const audioElem = document.querySelector('#flipCard')
 const CorrectAnswerElem = document.querySelector('#CorrectAnswer')
+const scoreElem = document.querySelector('.score')
+
 
 /*-------------- Functions -------------*/
-
-// function placingIcons () {
-//     const shuffledIcons = randomlyPlacing(icons)
-//     icons.forEach(function (card, index){
-        
-//         cardElem[index].textContent = card
-        
-//         cardElem[index].classList.add('hidden')
-       
-        
-//         // console.log(cardElem)
-//         console.log(card)
- 
-//     })
-    
-// }
 function placingIcons () {
     const shuffledIcons = randomlyPlacing(icons)
              icons.forEach(function (card, index){
@@ -117,11 +100,16 @@ function handleClick(event) {
 
             CorrectAnswerElem.play()
             pairs++
+            score++
+            addScore() 
+            
             console.log ("the total number of pairs is" + pairs)
             firstCard.classList.remove('hidden')
             secondCard.classList.remove('hidden')
             firstCard.classList.add('correct')
             secondCard.classList.add('correct')
+
+            
 
             firstCard = null
             secondCard = null
@@ -135,7 +123,11 @@ function handleClick(event) {
                 setTimeout(()=>{      
                     resetChoice()
             },250)
+            score--
+            addScore() 
+            
         }
+        // console.log(score)
     }
 
     function timer() {
@@ -182,7 +174,7 @@ function handleClick(event) {
 
              cardElem.forEach(card => {
             card.removeEventListener('click', handleClick)
-            showEnd("🎉 You Win!", "All pairs matched!")
+            showEnd("🎉 You Win!", `🎉 Your Score Is ${score}`)
         })
         }
     }
@@ -215,6 +207,10 @@ function restarGame(e) {
   
   timer()
        
+}
+
+function addScore() {
+    scoreElem.textContent = `Score: ${score}`
 }
 
 
